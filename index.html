@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>GeoQuiz – Geografia e Bandiere</title>
+  <meta name="theme-color" content="#58cc02">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-track="geo">
+  <!-- HOME -->
+  <main id="home" class="screen active">
+    <header class="topbar">
+      <div class="brand">🌍 GeoQuiz</div>
+      <div class="stats">
+        <span class="stat" title="Giorni consecutivi">🔥 <b id="streak">0</b></span>
+        <span class="stat" title="Punti esperienza">⚡ <b id="xp">0</b></span>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab" role="tab" data-track="geo"><span>🗺️</span> Geografia</button>
+      <button class="tab" role="tab" data-track="flags"><span>🚩</span> Bandiere</button>
+    </nav>
+
+    <section id="path" class="path" aria-label="Percorso dei livelli"></section>
+
+    <footer class="home-footer">
+      <button id="reset" class="link-btn">Azzera i progressi</button>
+    </footer>
+  </main>
+
+  <!-- LEZIONE -->
+  <main id="lesson" class="screen">
+    <div class="lesson-top">
+      <button id="quit" class="icon-btn" aria-label="Esci dalla lezione">✕</button>
+      <div class="progress"><div id="bar"></div></div>
+      <div class="hearts" title="Vite">❤️ <b id="hearts">5</b></div>
+    </div>
+
+    <div class="lesson-body">
+      <h2 id="prompt" class="prompt"></h2>
+      <div id="flagbox" class="flagbox" hidden><img id="flagimg" alt="Bandiera da indovinare"></div>
+      <div id="options" class="options"></div>
+      <form id="typeform" class="typeform" hidden autocomplete="off">
+        <input id="typeinput" type="text" placeholder="Scrivi la risposta…" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </form>
+    </div>
+
+    <div id="feedback" class="feedback">
+      <div class="feedback-inner">
+        <div id="fbtext" class="fb-text"></div>
+        <button id="action" class="btn primary" disabled>Controlla</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- RISULTATO -->
+  <main id="result" class="screen">
+    <div class="result-card">
+      <div id="resEmoji" class="res-emoji">🎉</div>
+      <h1 id="resTitle">Lezione completata!</h1>
+      <div id="resStars" class="stars"></div>
+      <div class="res-stats">
+        <div class="res-stat xp"><small>XP</small><b id="resXp">0</b></div>
+        <div class="res-stat acc"><small>Precisione</small><b id="resAcc">0%</b></div>
+      </div>
+      <div class="res-buttons">
+        <button id="resRetry" class="btn secondary">Riprova</button>
+        <button id="resContinue" class="btn primary">Continua</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
