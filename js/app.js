@@ -39,7 +39,7 @@ const shuffle = (a) => {
   return a;
 };
 const byCode = Object.fromEntries(COUNTRIES.map((c) => [c.f, c]));
-const flagUrl = (c) => `https://flagcdn.com/w320/${c.f}.png`;
+const flagUrl = (c) => (window.FLAG_DATA && FLAG_DATA[c.f]) || `flags/${c.f}.svg`;
 const flagEmoji = (c) =>
   String.fromCodePoint(...c.f.toUpperCase().split("").map((ch) => 0x1f1e6 + ch.charCodeAt(0) - 65));
 
@@ -428,12 +428,17 @@ document.querySelectorAll(".tab").forEach((t) =>
 $("action").addEventListener("click", onAction);
 $("typeform").addEventListener("submit", (e) => { e.preventDefault(); if (!$("action").disabled || L.checked) onAction(); });
 $("typeinput").addEventListener("input", () => { if (!L.checked) $("action").disabled = !$("typeinput").value.trim(); });
-$("quit").addEventListener("click", () => {
-  if (confirm("Vuoi uscire? I progressi di questa lezione andranno persi.")) { L = null; renderHome(); showScreen("home"); }
-});
-$("reset").addEventListener("click", () => {
-  if (confirm("Vuoi davvero azzerare tutti i progressi?")) { state = defaultState(); save(); track = "geo"; renderHome(); }
-});
+function askConfirm(text, yesLabel, onYes) {   // conferma nella pagina (confirm() non è sempre disponibile)
+  $("dlgText").textContent = text;
+  $("dlgYes").textContent = yesLabel;
+  $("dialog").hidden = false;
+  $("dlgYes").onclick = () => { $("dialog").hidden = true; onYes(); };
+  $("dlgNo").onclick = () => { $("dialog").hidden = true; };
+}
+$("quit").addEventListener("click", () =>
+  askConfirm("Vuoi uscire? I progressi di questa lezione andranno persi.", "Esci", () => { L = null; renderHome(); showScreen("home"); }));
+$("reset").addEventListener("click", () =>
+  askConfirm("Vuoi davvero azzerare tutti i progressi?", "Azzera", () => { state = defaultState(); save(); track = "geo"; renderHome(); }));
 document.addEventListener("keydown", (e) => {
   if (!L || !$("lesson").classList.contains("active")) return;
   if (e.key === "Enter") {

@@ -161,3 +161,8 @@ button { font: inherit; cursor: pointer; }
   .fb-text { font-size: 16px; }
 }
 .flag-emoji.small { font-size: 56px; }
+
+.dialog { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: grid; place-items: center; padding: 20px; z-index: 50; }
+.dialog[hidden] { display: none; }
+.dialog-box { background: #fff; border-radius: 18px; padding: 24px; max-width: 360px; width: 100%; text-align: center; }
+.dialog-box p { margin: 0 0 20px; font-size: 18px; font-weight: 800; }
